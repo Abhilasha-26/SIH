@@ -1,1 +1,16 @@
-# SIH
+
+MONGODB_URI=mongodb+srv://harsh20236058:Harshnegi@cluster0.ptcujcn.mongodb.net/expenses?retryWrites=true&w=majority&appName=Cluster0
+
+SESSION_SECRET=kuchbhi
+JWT_SECRET=kuchbhi
+SECRET_KEY=kuchbhi
+
+
+GOOGLE_CLIENT_ID=553198819111-bake0rcr2f1k58phsh0splpqunpmh01h.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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
+
+PORT=4000
+PORT_FRONTEND=5173
+
+
+NODE_ENV=production
