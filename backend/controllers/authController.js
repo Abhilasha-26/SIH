@@ -1,3 +1,4 @@
+// controllers/authController.js
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
@@ -15,7 +16,7 @@ const createToken = (user) => {
 // Register
 exports.registerUser = async (req, res) => {
   try {
-    const { userId, email, password, role, profile, institution } = req.body;
+    const { userId, email, password, role, profile } = req.body;
 
     const existing = await User.findOne({ email });
     if (existing) return res.status(400).json({ message: "Email already registered" });
@@ -28,19 +29,20 @@ exports.registerUser = async (req, res) => {
       password: hashedPassword,
       role,
       profile,
-    //   institution,
       isVerified: false,
     });
 
     const token = createToken(newUser);
+
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: "None",
+      secure: process.env.NODE_ENV === "production", // secure only in prod (https)
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    res.status(201).json({ message: "Registered successfully", user: newUser });
+    // return token as well so frontend using localStorage can pick it up
+    res.status(201).json({ message: "Registered successfully", user: newUser, token });
   } catch (error) {
     res.status(500).json({ message: "Registration failed", error: error.message });
   }
@@ -57,15 +59,17 @@ exports.loginUser = async (req, res) => {
     if (!isMatch) return res.status(401).json({ message: "Invalid credentials" });
 
     const token = createToken(user);
+
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: "None",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       maxAge: 24 * 60 * 60 * 1000,
     });
 
     res.json({
       message: "Login successful",
+      token, // <--- send token so frontend can store it if it wants
       user: {
         id: user._id,
         email: user.email,
@@ -88,8 +92,8 @@ exports.googleCallback = (req, res) => {
     const token = createToken(user);
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: "None",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       maxAge: 24 * 60 * 60 * 1000,
     });
 
