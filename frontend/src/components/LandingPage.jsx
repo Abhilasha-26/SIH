@@ -1,5 +1,5 @@
 "use client"
-
+import { motion } from "framer-motion"
 import { useEffect } from "react"
 
 export default function ProfessionalLandingPage() {
@@ -131,41 +131,45 @@ export default function ProfessionalLandingPage() {
                 S
               </div>
               <div className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Smart Student Hub
+                SIHnchronize
               </div>
             </div>
 
             <nav className="hidden lg:flex items-center space-x-8 text-gray-600 font-medium">
               <a
                 href="#features"
-                className="text-gray-600 focus:text-blue-600 focus:outline-none transition-colors duration-300"
+                className="text-gray-600 hover:text-purple-700 focus:text-blue-600 focus:outline-none transition-colors duration-300"
               >
                 Features
               </a>
               <a
                 href="#benefits"
-                className="text-gray-600 focus:text-blue-600 focus:outline-none transition-colors duration-300"
+                className="text-gray-600 hover:text-purple-700 focus:text-blue-600 focus:outline-none transition-colors duration-300"
               >
                 Benefits
               </a>
               <a
                 href="#stats"
-                className="text-gray-600 focus:text-blue-600 focus:outline-none transition-colors duration-300"
+                className="text-gray-600 hover:text-purple-700 focus:text-blue-600 focus:outline-none transition-colors duration-300"
               >
                 Impact
               </a>
               <a
                 href="#contact"
-                className="text-gray-600 focus:text-blue-600 focus:outline-none transition-colors duration-300"
+                className="text-gray-600 hover:text-purple-700 focus:text-blue-600 focus:outline-none transition-colors duration-300"
               >
                 Contact
               </a>
             </nav>
 
             <div className="hidden md:flex items-center space-x-3">
-              <button className="px-5 py-2.5 text-gray-700 font-medium focus:text-blue-600 focus:outline-none transition-colors duration-300">
-                Login
-              </button>
+              <button className="px-5 py-2.5 font-medium border-2 border-purple-600 rounded-xl text-gray-700 
+  hover:text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 
+  transition-colors duration-300 focus:outline-none">
+  Login
+</button>
+
+
               <button className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-xl focus:from-blue-700 focus:to-purple-700 focus:outline-none transition-all duration-300 shadow-lg">
                 Start Free Trial
               </button>
@@ -205,18 +209,8 @@ export default function ProfessionalLandingPage() {
                   Explore Features
                 </button>
               </div>
-
-              {/* Trust Indicators */}
-              <div className="pt-8 border-t border-gray-200">
-                <p className="text-sm text-gray-500 mb-4">Compliance & Recognition</p>
-                <div className="flex items-center space-x-8 text-gray-400">
-                  <div className="text-sm font-semibold">NAAC Approved</div>
-                  <div className="text-sm font-semibold">AICTE Compliant</div>
-                  <div className="text-sm font-semibold">NIRF Ready</div>
-                  <div className="text-sm font-semibold">UGC Recognized</div>
-                </div>
-              </div>
             </div>
+            
 
             <div className="relative">
               <div className="relative z-10 bg-white rounded-2xl shadow-2xl p-8 transition-shadow duration-300">
@@ -247,39 +241,63 @@ export default function ProfessionalLandingPage() {
           </div>
         </div>
       </section>
+      {/* Trust Indicators */}
+      <div className="bg-grey-400 py-6">
+        <div className="text-center mb-4">
+          <p className="text-sm text-gray-700 font-medium">
+             Compliance & Recognition
+          </p>
+        </div>
+      <div className="flex justify-center gap-6">
+      {["NAAC Approved", "AICTE Compliant", "NIRF Ready", "UGC Recognized"].map(
+      (item, idx) => (
+        <motion.span
+          key={idx}
+          className="text-sm font-semibold"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: idx * 0.2 }}
+          viewport={{ once: true }}
+        >
+          {item}
+        </motion.span>
+      )
+    )}
+  </div>
+</div>
+{/* FEATURES SECTION */}
+<section id="features" className="py-24 bg-white">
+  <div className="max-w-7xl mx-auto px-6">
+    <div className="text-center space-y-4 mb-16">
+      <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 text-balance">
+        Powerful Features for Modern Education
+      </h2>
+      <p className="text-xl text-gray-600 max-w-3xl mx-auto text-pretty">
+        Comprehensive tools designed to streamline student management and enhance educational outcomes
+      </p>
+    </div>
 
-      {/* FEATURES SECTION */}
-      <section id="features" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 text-balance">
-              Powerful Features for Modern Education
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto text-pretty">
-              Comprehensive tools designed to streamline student management and enhance educational outcomes
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map(({ icon, title, desc, gradient }, idx) => (
-              <div
-                key={idx}
-                className="group relative bg-white p-8 rounded-2xl shadow-lg transition-shadow duration-300 border border-gray-100 focus-within:border-gray-200"
-              >
-                <div className="relative space-y-4">
-                  <div
-                    className={`w-14 h-14 bg-gradient-to-r ${gradient} rounded-xl flex items-center justify-center text-2xl shadow-lg`}
-                  >
-                    {icon}
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
-                  <p className="text-gray-600 leading-relaxed text-pretty">{desc}</p>
-                </div>
-              </div>
-            ))}
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {features.map(({ icon, title, desc, gradient }, idx) => (
+        <div
+          key={idx}
+          className="group relative bg-white p-8 rounded-2xl shadow-lg transition-transform duration-300 border border-gray-100 focus-within:border-gray-200 hover:scale-105"
+        >
+          <div className="relative space-y-4">
+            <div
+              className={`w-14 h-14 bg-gradient-to-r ${gradient} rounded-xl flex items-center justify-center text-2xl shadow-lg`}
+            >
+              {icon}
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
+            <p className="text-gray-600 leading-relaxed text-pretty">{desc}</p>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* BENEFITS SECTION */}
       <section id="benefits" className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
@@ -373,7 +391,7 @@ export default function ProfessionalLandingPage() {
       </section>
 
       {/* FOOTER */}
-      <footer id="contact" className="bg-gray-900 text-white py-16">
+      <footer id="contact" className="bg-gray-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-12">
             <div className="space-y-4">
