@@ -58,7 +58,6 @@ export default function RegisterPage() {
           userId: formData.userId,
           password: formData.password,
           role: formData.role,
-          role: formData.role,
         }),
       });
 
