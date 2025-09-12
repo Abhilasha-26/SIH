@@ -1,6 +1,8 @@
 
 MONGODB_URI=mongodb+srv://harsh20236058:Harshnegi@cluster0.ptcujcn.mongodb.net/expenses?retryWrites=true&w=majority&appName=Cluster0
 
+FRONTEND_URL =  http://localhost:5173
+
 SESSION_SECRET=kuchbhi
 JWT_SECRET=kuchbhi
 SECRET_KEY=kuchbhi
