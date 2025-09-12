@@ -61,7 +61,7 @@ export default function LoginPage() {
 
       {/* Right side with login form (v1 styling, v2 logic) */}
       <div className="flex items-center justify-center px-6 bg-white">
-        <div className="w-full max-w-md p-8 space-y-6 transition-all duration-500 ease-out transform bg-white rounded-2xl drop-shadow-2xl hover:scale-105 hover:shadow-2xl">
+        <div className="w-full max-w-md p-8 space-y-6 transition-all duration-500 ease-out transform bg-white rounded-2xl drop-shadow-2xl ">
           <h2 className="text-3xl font-extrabold text-center text-purple-700">Login</h2>
 
           <p className="text-lg font-medium text-center text-gray-700">
