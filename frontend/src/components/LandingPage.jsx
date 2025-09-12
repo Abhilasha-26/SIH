@@ -131,45 +131,41 @@ export default function ProfessionalLandingPage() {
                 S
               </div>
               <div className="text-xl font-bold text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">
-                SIHnchronize
+                Smart Student Hub
               </div>
             </div>
 
             <nav className="items-center hidden space-x-8 font-medium text-gray-600 lg:flex">
               <a
                 href="#features"
-                className="text-gray-600 transition-colors duration-300 hover:text-purple-700 focus:text-blue-600 focus:outline-none"
+                className="text-gray-600 transition-colors duration-300 focus:text-blue-600 focus:outline-none"
               >
                 Features
               </a>
               <a
                 href="#benefits"
-                className="text-gray-600 transition-colors duration-300 hover:text-purple-700 focus:text-blue-600 focus:outline-none"
+                className="text-gray-600 transition-colors duration-300 focus:text-blue-600 focus:outline-none"
               >
                 Benefits
               </a>
               <a
                 href="#stats"
-                className="text-gray-600 transition-colors duration-300 hover:text-purple-700 focus:text-blue-600 focus:outline-none"
+                className="text-gray-600 transition-colors duration-300 focus:text-blue-600 focus:outline-none"
               >
                 Impact
               </a>
               <a
                 href="#contact"
-                className="text-gray-600 transition-colors duration-300 hover:text-purple-700 focus:text-blue-600 focus:outline-none"
+                className="text-gray-600 transition-colors duration-300 focus:text-blue-600 focus:outline-none"
               >
                 Contact
               </a>
             </nav>
 
             <div className="items-center hidden space-x-3 md:flex">
-              <button className="px-5 py-2.5 font-medium border-2 border-purple-600 rounded-xl text-gray-700 
-  hover:text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 
-  transition-colors duration-300 focus:outline-none">
-  Login
-</button>
-
-
+              <button className="px-5 py-2.5 text-gray-700 font-medium focus:text-blue-600 focus:outline-none transition-colors duration-300">
+                Login
+              </button>
               <button className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-xl focus:from-blue-700 focus:to-purple-700 focus:outline-none transition-all duration-300 shadow-lg">
                 Start Free Trial
               </button>
@@ -241,63 +237,39 @@ export default function ProfessionalLandingPage() {
           </div>
         </div>
       </section>
-      {/* Trust Indicators */}
-      <div className="py-6 bg-grey-400">
-        <div className="mb-4 text-center">
-          <p className="text-sm font-medium text-gray-700">
-             Compliance & Recognition
-          </p>
-        </div>
-      <div className="flex justify-center gap-6">
-      {["NAAC Approved", "AICTE Compliant", "NIRF Ready", "UGC Recognized"].map(
-      (item, idx) => (
-        <motion.span
-          key={idx}
-          className="text-sm font-semibold"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: idx * 0.2 }}
-          viewport={{ once: true }}
-        >
-          {item}
-        </motion.span>
-      )
-    )}
-  </div>
-</div>
-{/* FEATURES SECTION */}
-<section id="features" className="py-24 bg-white">
-  <div className="px-6 mx-auto max-w-7xl">
-    <div className="mb-16 space-y-4 text-center">
-      <h2 className="text-4xl font-bold text-gray-900 lg:text-5xl text-balance">
-        Powerful Features for Modern Education
-      </h2>
-      <p className="max-w-3xl mx-auto text-xl text-gray-600 text-pretty">
-        Comprehensive tools designed to streamline student management and enhance educational outcomes
-      </p>
-    </div>
 
-    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      {features.map(({ icon, title, desc, gradient }, idx) => (
-        <div
-          key={idx}
-          className="relative p-8 transition-transform duration-300 bg-white border border-gray-100 shadow-lg group rounded-2xl focus-within:border-gray-200 hover:scale-105"
-        >
-          <div className="relative space-y-4">
-            <div
-              className={`w-14 h-14 bg-gradient-to-r ${gradient} rounded-xl flex items-center justify-center text-2xl shadow-lg`}
-            >
-              {icon}
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
-            <p className="leading-relaxed text-gray-600 text-pretty">{desc}</p>
+      {/* FEATURES SECTION */}
+      <section id="features" className="py-24 bg-white">
+        <div className="px-6 mx-auto max-w-7xl">
+          <div className="mb-16 space-y-4 text-center">
+            <h2 className="text-4xl font-bold text-gray-900 lg:text-5xl text-balance">
+              Powerful Features for Modern Education
+            </h2>
+            <p className="max-w-3xl mx-auto text-xl text-gray-600 text-pretty">
+              Comprehensive tools designed to streamline student management and enhance educational outcomes
+            </p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {features.map(({ icon, title, desc, gradient }, idx) => (
+              <div
+                key={idx}
+                className="relative p-8 transition-shadow duration-300 bg-white border border-gray-100 shadow-lg group rounded-2xl focus-within:border-gray-200"
+              >
+                <div className="relative space-y-4">
+                  <div
+                    className={`w-14 h-14 bg-gradient-to-r ${gradient} rounded-xl flex items-center justify-center text-2xl shadow-lg`}
+                  >
+                    {icon}
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
+                  <p className="leading-relaxed text-gray-600 text-pretty">{desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
-
+      </section>
 
       {/* BENEFITS SECTION */}
       <section id="benefits" className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
@@ -391,7 +363,7 @@ export default function ProfessionalLandingPage() {
       </section>
 
       {/* FOOTER */}
-      <footer id="contact" className="py-16 text-white bg-gray-800">
+      <footer id="contact" className="py-16 text-white bg-gray-900">
         <div className="px-6 mx-auto max-w-7xl">
           <div className="grid gap-12 md:grid-cols-4">
             <div className="space-y-4">

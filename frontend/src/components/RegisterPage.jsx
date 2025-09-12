@@ -58,6 +58,7 @@ export default function RegisterPage() {
           userId: formData.userId,
           password: formData.password,
           role: formData.role,
+          role: formData.role,
         }),
       });
 
@@ -122,6 +123,7 @@ export default function RegisterPage() {
               ))}
             </div>
 
+            {/* Email */}
             {/* Email */}
             <div>
               <label className="block text-sm font-medium text-gray-700">Email</label>
