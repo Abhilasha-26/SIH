@@ -1,64 +1,64 @@
-"use client"
-import { motion } from "framer-motion"
-import { useEffect } from "react"
+"use client";
+import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 export default function ProfessionalLandingPage() {
   useEffect(() => {
     const handleSmoothScroll = (e) => {
-      const href = e.target.getAttribute("href")
+      const href = e.target.getAttribute("href");
       if (href && href.startsWith("#")) {
-        e.preventDefault()
-        const targetElement = document.querySelector(href)
+        e.preventDefault();
+        const targetElement = document.querySelector(href);
         if (targetElement) {
           targetElement.scrollIntoView({
             behavior: "smooth",
             block: "start",
-          })
+          });
         }
       }
-    }
+    };
 
     // Add smooth scroll listeners to navigation links
-    const navLinks = document.querySelectorAll('nav a[href^="#"]')
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
     navLinks.forEach((link) => {
-      link.addEventListener("click", handleSmoothScroll)
-    })
+      link.addEventListener("click", handleSmoothScroll);
+    });
 
-    const statsEl = document.getElementById("stats")
-    if (!statsEl) return
+    const statsEl = document.getElementById("stats");
+    if (!statsEl) return;
 
-    const counters = statsEl.querySelectorAll(".js-counter")
+    const counters = statsEl.querySelectorAll(".js-counter");
     const observer = new IntersectionObserver(
       (entries, obs) => {
-        if (!entries[0].isIntersecting) return
+        if (!entries[0].isIntersecting) return;
         counters.forEach((el) => {
-          const target = Number.parseInt(el.dataset.target, 10) || 0
-          let current = 0
-          const step = Math.max(1, Math.floor(target / 120))
+          const target = Number.parseInt(el.dataset.target, 10) || 0;
+          let current = 0;
+          const step = Math.max(1, Math.floor(target / 120));
           const tick = () => {
-            current += step
+            current += step;
             if (current < target) {
-              el.textContent = current
-              requestAnimationFrame(tick)
+              el.textContent = current;
+              requestAnimationFrame(tick);
             } else {
-              el.textContent = target
+              el.textContent = target;
             }
-          }
-          tick()
-        })
-        obs.disconnect()
+          };
+          tick();
+        });
+        obs.disconnect();
       },
-      { threshold: 0.3 },
-    )
-    observer.observe(statsEl)
+      { threshold: 0.3 }
+    );
+    observer.observe(statsEl);
 
     return () => {
-      observer.disconnect()
+      observer.disconnect();
       navLinks.forEach((link) => {
-        link.removeEventListener("click", handleSmoothScroll)
-      })
-    }
-  }, [])
+        link.removeEventListener("click", handleSmoothScroll);
+      });
+    };
+  }, []);
 
   const features = [
     {
@@ -97,7 +97,7 @@ export default function ProfessionalLandingPage() {
       desc: "Seamless connectivity with existing LMS, ERP, and institutional systems.",
       gradient: "from-teal-500 to-cyan-500",
     },
-  ]
+  ];
 
   const benefits = [
     {
@@ -118,7 +118,7 @@ export default function ProfessionalLandingPage() {
       desc: "Access actionable insights and comprehensive analytics to optimize student outcomes.",
       stat: "3x faster decision making",
     },
-  ]
+  ];
 
   return (
     <div className="antialiased text-gray-900 bg-white scroll-smooth">
@@ -131,41 +131,46 @@ export default function ProfessionalLandingPage() {
                 S
               </div>
               <div className="text-xl font-bold text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">
-                Smart Student Hub
+                SIHnchronize
               </div>
             </div>
 
             <nav className="items-center hidden space-x-8 font-medium text-gray-600 lg:flex">
               <a
                 href="#features"
-                className="text-gray-600 transition-colors duration-300 focus:text-blue-600 focus:outline-none"
+                className="text-gray-600 transition-colors duration-300 hover:text-purple-700 focus:text-blue-600 focus:outline-none"
               >
                 Features
               </a>
               <a
                 href="#benefits"
-                className="text-gray-600 transition-colors duration-300 focus:text-blue-600 focus:outline-none"
+                className="text-gray-600 transition-colors duration-300 hover:text-purple-700 focus:text-blue-600 focus:outline-none"
               >
                 Benefits
               </a>
               <a
                 href="#stats"
-                className="text-gray-600 transition-colors duration-300 focus:text-blue-600 focus:outline-none"
+                className="text-gray-600 transition-colors duration-300 hover:text-purple-700 focus:text-blue-600 focus:outline-none"
               >
                 Impact
               </a>
               <a
                 href="#contact"
-                className="text-gray-600 transition-colors duration-300 focus:text-blue-600 focus:outline-none"
+                className="text-gray-600 transition-colors duration-300 hover:text-purple-700 focus:text-blue-600 focus:outline-none"
               >
                 Contact
               </a>
             </nav>
 
             <div className="items-center hidden space-x-3 md:flex">
-              <button className="px-5 py-2.5 text-gray-700 font-medium focus:text-blue-600 focus:outline-none transition-colors duration-300">
+              <button
+                className="px-5 py-2.5 font-medium border-2 border-purple-600 rounded-xl text-gray-700 
+  hover:text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 
+  transition-colors duration-300 focus:outline-none"
+              >
                 Login
               </button>
+
               <button className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-xl focus:from-blue-700 focus:to-purple-700 focus:outline-none transition-all duration-300 shadow-lg">
                 Start Free Trial
               </button>
@@ -192,8 +197,9 @@ export default function ProfessionalLandingPage() {
                   Experience
                 </h1>
                 <p className="max-w-2xl text-xl leading-relaxed text-gray-600 text-pretty">
-                  Centralize, validate, and showcase every student's academic journey with our comprehensive platform.
-                  Reduce administrative overhead while empowering students to excel.
+                  Centralize, validate, and showcase every student's academic
+                  journey with our comprehensive platform. Reduce administrative
+                  overhead while empowering students to excel.
                 </p>
               </div>
 
@@ -206,27 +212,40 @@ export default function ProfessionalLandingPage() {
                 </button>
               </div>
             </div>
-            
 
             <div className="relative">
               <div className="relative z-10 p-8 transition-shadow duration-300 bg-white shadow-2xl rounded-2xl">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold text-gray-800">Student Dashboard</h3>
+                    <h3 className="text-lg font-semibold text-gray-800">
+                      Student Dashboard
+                    </h3>
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between p-3 rounded-lg bg-blue-50">
-                      <span className="text-sm text-gray-600">Activities Completed</span>
-                      <span className="text-sm font-semibold text-blue-600">12/15</span>
+                      <span className="text-sm text-gray-600">
+                        Activities Completed
+                      </span>
+                      <span className="text-sm font-semibold text-blue-600">
+                        12/15
+                      </span>
                     </div>
                     <div className="flex items-center justify-between p-3 rounded-lg bg-green-50">
-                      <span className="text-sm text-gray-600">Certificates Earned</span>
-                      <span className="text-sm font-semibold text-green-600">8</span>
+                      <span className="text-sm text-gray-600">
+                        Certificates Earned
+                      </span>
+                      <span className="text-sm font-semibold text-green-600">
+                        8
+                      </span>
                     </div>
                     <div className="flex items-center justify-between p-3 rounded-lg bg-purple-50">
-                      <span className="text-sm text-gray-600">Portfolio Score</span>
-                      <span className="text-sm font-semibold text-purple-600">95%</span>
+                      <span className="text-sm text-gray-600">
+                        Portfolio Score
+                      </span>
+                      <span className="text-sm font-semibold text-purple-600">
+                        95%
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -237,7 +256,33 @@ export default function ProfessionalLandingPage() {
           </div>
         </div>
       </section>
-
+      {/* Trust Indicators */}
+      <div className="py-6 bg-grey-400">
+        <div className="mb-4 text-center">
+          <p className="text-sm font-medium text-gray-700">
+            Compliance & Recognition
+          </p>
+        </div>
+        <div className="flex justify-center gap-6">
+          {[
+            "NAAC Approved",
+            "AICTE Compliant",
+            "NIRF Ready",
+            "UGC Recognized",
+          ].map((item, idx) => (
+            <motion.span
+              key={idx}
+              className="text-sm font-semibold"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: idx * 0.2 }}
+              viewport={{ once: true }}
+            >
+              {item}
+            </motion.span>
+          ))}
+        </div>
+      </div>
       {/* FEATURES SECTION */}
       <section id="features" className="py-24 bg-white">
         <div className="px-6 mx-auto max-w-7xl">
@@ -246,7 +291,8 @@ export default function ProfessionalLandingPage() {
               Powerful Features for Modern Education
             </h2>
             <p className="max-w-3xl mx-auto text-xl text-gray-600 text-pretty">
-              Comprehensive tools designed to streamline student management and enhance educational outcomes
+              Comprehensive tools designed to streamline student management and
+              enhance educational outcomes
             </p>
           </div>
 
@@ -254,7 +300,7 @@ export default function ProfessionalLandingPage() {
             {features.map(({ icon, title, desc, gradient }, idx) => (
               <div
                 key={idx}
-                className="relative p-8 transition-shadow duration-300 bg-white border border-gray-100 shadow-lg group rounded-2xl focus-within:border-gray-200"
+                className="relative p-8 transition-transform duration-300 bg-white border border-gray-100 shadow-lg group rounded-2xl focus-within:border-gray-200 hover:scale-105"
               >
                 <div className="relative space-y-4">
                   <div
@@ -262,8 +308,12 @@ export default function ProfessionalLandingPage() {
                   >
                     {icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
-                  <p className="leading-relaxed text-gray-600 text-pretty">{desc}</p>
+                  <h3 className="text-xl font-semibold text-gray-900">
+                    {title}
+                  </h3>
+                  <p className="leading-relaxed text-gray-600 text-pretty">
+                    {desc}
+                  </p>
                 </div>
               </div>
             ))}
@@ -272,12 +322,18 @@ export default function ProfessionalLandingPage() {
       </section>
 
       {/* BENEFITS SECTION */}
-      <section id="benefits" className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+      <section
+        id="benefits"
+        className="py-24 bg-gradient-to-br from-gray-50 to-blue-50"
+      >
         <div className="px-6 mx-auto max-w-7xl">
           <div className="mb-16 space-y-4 text-center">
-            <h2 className="text-4xl font-bold text-gray-900 lg:text-5xl">Why Leading Institutions Choose Us</h2>
+            <h2 className="text-4xl font-bold text-gray-900 lg:text-5xl">
+              Why Leading Institutions Choose Us
+            </h2>
             <p className="max-w-3xl mx-auto text-xl text-gray-600">
-              Join hundreds of educational institutions that have transformed their student management approach
+              Join hundreds of educational institutions that have transformed
+              their student management approach
             </p>
           </div>
 
@@ -289,7 +345,9 @@ export default function ProfessionalLandingPage() {
                 </div>
                 <div className="space-y-3">
                   <h3 className="text-2xl font-bold text-gray-900">{title}</h3>
-                  <p className="max-w-sm mx-auto leading-relaxed text-gray-600">{desc}</p>
+                  <p className="max-w-sm mx-auto leading-relaxed text-gray-600">
+                    {desc}
+                  </p>
                   <div className="inline-flex items-center px-4 py-2 text-sm font-semibold text-blue-600 bg-white rounded-full shadow-md">
                     {stat}
                   </div>
@@ -301,34 +359,62 @@ export default function ProfessionalLandingPage() {
       </section>
 
       {/* STATISTICS SECTION */}
-      <section id="stats" className="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700">
+      <section
+        id="stats"
+        className="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700"
+      >
         <div className="max-w-6xl px-6 mx-auto text-center">
           <div className="mb-12">
-            <h2 className="mb-4 text-3xl font-bold text-white lg:text-4xl">Measurable Impact Across Institutions</h2>
-            <p className="text-xl text-blue-100">Real results from real institutions using Smart Student Hub</p>
+            <h2 className="mb-4 text-3xl font-bold text-white lg:text-4xl">
+              Measurable Impact Across Institutions
+            </h2>
+            <p className="text-xl text-blue-100">
+              Real results from real institutions using Smart Student Hub
+            </p>
           </div>
 
           <div className="grid gap-12 md:grid-cols-3">
             <div className="space-y-3">
-              <div className="text-5xl font-bold text-white lg:text-6xl js-counter" data-target="95">
+              <div
+                className="text-5xl font-bold text-white lg:text-6xl js-counter"
+                data-target="95"
+              >
                 0
               </div>
-              <div className="text-xl font-medium text-blue-100">Time Saved</div>
-              <div className="text-sm text-blue-200">Average reduction in administrative workload</div>
+              <div className="text-xl font-medium text-blue-100">
+                Time Saved
+              </div>
+              <div className="text-sm text-blue-200">
+                Average reduction in administrative workload
+              </div>
             </div>
             <div className="space-y-3">
-              <div className="text-5xl font-bold text-white lg:text-6xl js-counter" data-target="85">
+              <div
+                className="text-5xl font-bold text-white lg:text-6xl js-counter"
+                data-target="85"
+              >
                 0
               </div>
-              <div className="text-xl font-medium text-blue-100">Participation Increase</div>
-              <div className="text-sm text-blue-200">More students engaging in activities</div>
+              <div className="text-xl font-medium text-blue-100">
+                Participation Increase
+              </div>
+              <div className="text-sm text-blue-200">
+                More students engaging in activities
+              </div>
             </div>
             <div className="space-y-3">
-              <div className="text-5xl font-bold text-white lg:text-6xl js-counter" data-target="70">
+              <div
+                className="text-5xl font-bold text-white lg:text-6xl js-counter"
+                data-target="70"
+              >
                 0
               </div>
-              <div className="text-xl font-medium text-blue-100">Faster Accreditation</div>
-              <div className="text-sm text-blue-200">Accelerated compliance reporting</div>
+              <div className="text-xl font-medium text-blue-100">
+                Faster Accreditation
+              </div>
+              <div className="text-sm text-blue-200">
+                Accelerated compliance reporting
+              </div>
             </div>
           </div>
         </div>
@@ -342,8 +428,8 @@ export default function ProfessionalLandingPage() {
               Ready to Transform Your Institution?
             </h3>
             <p className="max-w-2xl mx-auto text-xl text-gray-600 text-pretty">
-              Join the education revolution. Schedule a personalized demo and see how Smart Student Hub can elevate your
-              institution.
+              Join the education revolution. Schedule a personalized demo and
+              see how Smart Student Hub can elevate your institution.
             </p>
           </div>
 
@@ -357,13 +443,14 @@ export default function ProfessionalLandingPage() {
           </div>
 
           <div className="pt-8 text-sm text-gray-500">
-            ✨ No credit card required • 30-day free trial • Setup in under 10 minutes
+            ✨ No credit card required • 30-day free trial • Setup in under 10
+            minutes
           </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer id="contact" className="py-16 text-white bg-gray-900">
+      <footer id="contact" className="py-16 text-white bg-gray-800">
         <div className="px-6 mx-auto max-w-7xl">
           <div className="grid gap-12 md:grid-cols-4">
             <div className="space-y-4">
@@ -374,7 +461,8 @@ export default function ProfessionalLandingPage() {
                 <div className="text-lg font-bold">Smart Student Hub</div>
               </div>
               <p className="leading-relaxed text-gray-400 text-pretty">
-                Empowering educational institutions with intelligent student management solutions.
+                Empowering educational institutions with intelligent student
+                management solutions.
               </p>
             </div>
 
@@ -383,7 +471,7 @@ export default function ProfessionalLandingPage() {
               <div className="space-y-2 text-gray-400">
                 <div>📧 contact@smartstudenthub.edu</div>
                 <div>📞 +91 88400 47057</div>
-                <div>☎️ +91 11223 44556</div>
+                <div>☎ +91 11223 44556</div>
               </div>
             </div>
 
@@ -427,5 +515,5 @@ export default function ProfessionalLandingPage() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
