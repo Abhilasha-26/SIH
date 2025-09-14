@@ -49,78 +49,118 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="grid min-h-screen grid-cols-1 md:grid-cols-2">
-      {/* Left side with full cover image (v1 UI) */}
-      <div className="relative hidden w-full h-screen md:block">
-        <img
-          src="/images/sih2-Picsart-AiImageEnhancer.jpg"
-          alt="Login illustration"
-          className="absolute inset-0 object-cover object-center w-full h-full"
-        />
-      </div>
+    <div className="flex flex-col min-h-screen">
+      <div className="grid flex-1 grid-cols-1 md:grid-cols-2">
+        {/* Left side with cover image + overlay */}
+        <div className="relative hidden md:block">
+          <img
+            src="/images/sih2-Picsart-AiImageEnhancer.jpg"
+            alt="Login illustration"
+            className="absolute inset-0 object-cover w-full h-full"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-purple-700/30 to-black/60"></div>
 
-      {/* Right side with login form (v1 styling, v2 logic) */}
-      <div className="flex items-center justify-center px-6 bg-white">
-        <div className="w-full max-w-md p-8 space-y-6 transition-all duration-500 ease-out transform bg-white rounded-2xl drop-shadow-2xl ">
-          <h2 className="text-3xl font-extrabold text-center text-purple-700">Login</h2>
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-10">
+            <h1 className="text-5xl font-extrabold text-white drop-shadow-lg">
+              Welcome Back 🚀
+            </h1>
+            <p className="mt-4 text-lg text-gray-200 max-w-lg">
+              Log in to continue your journey with{" "}
+              <span className="font-bold text-purple-300">SIHchronize</span>
+            </p>
+          </div>
+        </div>
 
-          <p className="text-lg font-medium text-center text-gray-700">
-            Welcome to{' '}
-            <span className="font-bold text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">
-              SIHchronize 🚀
-            </span>
-          </p>
+        {/* Right side with login form */}
+        <div className="flex items-center justify-center px-6 bg-gradient-to-br from-gray-50 via-white to-gray-100">
+          <div className="w-full max-w-lg p-12 space-y-8 rounded-3xl bg-white/90 backdrop-blur-md shadow-2xl border border-gray-300 hover:shadow-purple-300/40 transition duration-500">
+            {/* Title */}
+            <h2 className="text-4xl font-extrabold text-center text-transparent bg-gradient-to-r from-blue-600 to-purple-700 bg-clip-text">
+              Login
+            </h2>
 
-          {error && <p className="text-sm text-center text-red-600">{error}</p>}
+            <p className="text-lg font-medium text-center text-gray-600">
+              Welcome to{" "}
+              <span className="font-bold text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">
+                SIHchronize
+              </span>
+            </p>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Email</label>
-              <div className="flex items-center px-3 mt-1 border rounded-lg">
-                <Mail className="w-5 h-5 text-purple-600" />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 outline-none"
-                  placeholder="you@example.com"
-                />
+            {error && (
+              <p className="text-sm text-center font-medium text-red-600 bg-red-50 py-2 px-3 rounded-md">
+                {error}
+              </p>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Email */}
+              <div>
+                <label className="block mb-1 text-sm font-semibold text-gray-700">
+                  Email
+                </label>
+                <div className="flex items-center px-3 py-2 border rounded-xl focus-within:ring-2 focus-within:ring-purple-500 bg-gray-50">
+                  <Mail className="w-5 h-5 text-purple-600" />
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-3 py-1 bg-transparent outline-none text-gray-800 placeholder-gray-400"
+                    placeholder="you@example.com"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Password</label>
-              <div className="flex items-center px-3 mt-1 border rounded-lg">
-                <Lock className="w-5 h-5 text-purple-600" />
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 outline-none"
-                  placeholder="••••••••"
-                />
+              {/* Password */}
+              <div>
+                <label className="block mb-1 text-sm font-semibold text-gray-700">
+                  Password
+                </label>
+                <div className="flex items-center px-3 py-2 border rounded-xl focus-within:ring-2 focus-within:ring-purple-500 bg-gray-50">
+                  <Lock className="w-5 h-5 text-purple-600" />
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-3 py-1 bg-transparent outline-none text-gray-800 placeholder-gray-400"
+                    placeholder="••••••••"
+                  />
+                </div>
               </div>
-            </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-3 font-semibold text-white transition rounded-lg shadow-md bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-            >
-              {loading ? "Logging in..." : "Login"}
-            </button>
-          </form>
+              {/* Button */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-3 font-semibold text-white rounded-xl shadow-md bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-transform transform hover:scale-105"
+              >
+                {loading ? "Logging in..." : "Login"}
+              </button>
+            </form>
 
-          <p className="text-sm text-center text-gray-600">
-            Don’t have an account?{' '}
-            <Link to="/register" className="text-blue-600 hover:underline">Register</Link>
-          </p>
+            {/* Footer link */}
+            <p className="text-sm text-center text-gray-600">
+              Don’t have an account?{" "}
+              <Link
+                to="/register"
+                className="font-semibold text-purple-600 hover:underline"
+              >
+                Register
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
+
+      {/* Page footer */}
+      <footer className="py-4 text-center bg-gradient-to-r from-gray-100 to-gray-200 border-t border-gray-300">
+        <p className="text-sm text-gray-600">
+          © {new Date().getFullYear()} SIHchronize. All rights reserved.
+        </p>
+      </footer>
     </div>
   );
 }
