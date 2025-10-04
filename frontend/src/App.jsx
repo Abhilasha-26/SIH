@@ -5,6 +5,14 @@ import LandingPage from "./components/LandingPage";
 import ProfilePage from "./components/ProfilePage";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminHome from "./components/admin/AdminHome";
+import StudentList from "./components/admin/StudentList";
+import BulkUpload from "./components/admin/BulkUpload";
+import InviteAdmins from "./components/admin/InviteAdmins";
+import AdminRequests from "./components/admin/AdminRequests";
+import ActivityRequests from "./components/admin/ActivityRequests";
+import AttendanceSubmissions from "./components/admin/AttendanceSubmissions";
 
 export default function App() {
   return (
@@ -12,8 +20,17 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/login" element={<LoginPage />} />         
-        <Route path="/register" element={<RegisterPage />} /> 
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminHome />} />
+          <Route path="students" element={<StudentList />} />
+          <Route path="bulk-upload" element={<BulkUpload />} />
+          <Route path="invite-admins" element={<InviteAdmins />} />
+          <Route path="requests" element={<AdminRequests />} />
+          <Route path="activity-requests" element={<ActivityRequests />} />
+          <Route path="attendance" element={<AttendanceSubmissions />} />
+        </Route>
       </Routes>
     </Router>
   );
