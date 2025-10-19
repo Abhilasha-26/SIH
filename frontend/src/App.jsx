@@ -12,7 +12,7 @@ import BulkUpload from "./components/admin/BulkUpload";
 import InviteAdmins from "./components/admin/InviteAdmins";
 import AdminRequests from "./components/admin/AdminRequests";
 import ActivityRequests from "./components/admin/ActivityRequests";
-import AttendanceSubmissions from "./components/admin/AttendanceSubmissions";
+import AdminEditProfile from "./components/admin/AttendanceSubmissions";
 
 export default function App() {
   return (
@@ -29,7 +29,7 @@ export default function App() {
           <Route path="invite-admins" element={<InviteAdmins />} />
           <Route path="requests" element={<AdminRequests />} />
           <Route path="activity-requests" element={<ActivityRequests />} />
-          <Route path="attendance" element={<AttendanceSubmissions />} />
+          <Route path="edit" element={<AdminEditProfile />} />
         </Route>
       </Routes>
     </Router>
