@@ -1,218 +1,261 @@
 import React, { useState } from "react";
-import { User, Mail, Lock, Briefcase } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
 
-// Vite: use import.meta.env for environment variables
-const API_URL = import.meta.env.VITE_API_URL || ""; // leave empty if you prefer relative paths
+const plans = [
+  {
+    name: "Basic",
+    price: "Rs.20,000",
+    duration: "1 Year",
+    description:
+      "Digitize your institution’s core data and track academic progress efficiently.",
+    features: [
+      "Institution & student data registration",
+      "Faculty & student lifecycle tracking",
+      "Annual performance reports (PDF export)",
+    ],
+    style: "basic",
+  },
+  {
+    name: "Gold",
+    price: "Rs.80,000",
+    duration: "3 Years",
+    description:
+      "Unlock deeper analytics, government scheme integration, and smart performance insights.",
+    features: [
+      "Government scheme & grant tracking (PMSSS, NSP, etc.)",
+      "Automated academic & attendance analytics",
+      "Priority customer support",
+    ],
+    style: "gold",
+  },
+  {
+    name: "Premium",
+    price: "Rs.1,50,000",
+    duration: "5 Years",
+    description:
+      "Experience full-scale institutional analytics, AI-driven insights, and national ranking metrics.",
+    features: [
+      "NIRF & NAAC ranking readiness metrics",
+      "Research & innovation performance tracking",
+      "Dedicated success manager (24x7 support)",
+    ],
+    style: "silver",
+  },
+];
 
-export default function RegisterPage() {
+const RegisterPage = () => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    middleName: "",
-    lastName: "",
+    collegeName: "",
+    collegeType: "Government",
     email: "",
     userId: "",
     password: "",
-    confirmPassword: "",
-    role: "",
+    aisheCode: "",
   });
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [showPlans, setShowPlans] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
+    console.log("College Registration Data:", formData);
+    setShowPlans(true);
+  };
 
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
-
-    if (!formData.role) {
-      setError("Please select a role");
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const fetchPath = API_URL
-        ? `${API_URL}/api/auth/register`
-        : `/api/auth/register`;
-
-      const res = await fetch(fetchPath, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          firstName: formData.firstName,
-          middleName: formData.middleName,
-          lastName: formData.lastName,
-          email: formData.email,
-          userId: formData.userId,
-          password: formData.password,
-          role: formData.role,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Registration failed");
-      }
-
-      if (data.token) localStorage.setItem("token", data.token);
-      if (data.user) localStorage.setItem("user", JSON.stringify(data.user));
-
-      navigate("/profile");
-    } catch (err) {
-      setError(err.message || "Something went wrong");
-    } finally {
-      setLoading(false);
-    }
+  const handlePayment = (plan) => {
+    console.log("Proceeding to payment for:", plan);
   };
 
   return (
-    <div className="grid min-h-screen grid-cols-1 md:grid-cols-2">
-      {/* Left side - Full image (UI from v1) */}
-      <div className="relative hidden w-full h-screen md:block">
-        <img
-          src="/images/img2-Picsart-AiImageEnhancer.jpg"
-          alt="Register illustration"
-          className="absolute inset-0 object-cover object-center w-full h-full"
-        />
-      </div>
-
-      {/* Right side - Register Form (v1 styling, v2 logic) */}
-      <div className="flex items-center justify-center px-6 bg-white">
-        <div className="w-full max-w-md p-8 space-y-6 transition-all duration-500 ease-out transform bg-white rounded-2xl drop-shadow-2xl ">
-          <h2 className="text-3xl font-extrabold text-center text-purple-700">Create Account</h2>
-
-          <p className="text-lg font-medium text-center text-gray-700">
-            Welcome to{' '}
-            <span className="font-bold text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">
-              SIHchronize 🚀
-            </span>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: "3rem",
+        backgroundImage: "url('/images/18.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        position: "relative",
+      }}
+    >
+      {/* Registration Form */}
+      <div
+        className={`bg-black/70 backdrop-blur-lg rounded-3xl shadow-2xl flex flex-col md:flex-row w-full max-w-5xl overflow-hidden border border-gray-700 mb-16 transition-all duration-300 ${
+          showPlans ? "opacity-40 blur-[1px] pointer-events-none" : ""
+        }`}
+      >
+        <div className="flex-1 flex flex-col justify-center text-white p-14 md:p-16">
+          <h1 className="text-5xl font-bold mb-6">Let’s Get Started</h1>
+          <p className="text-gray-300 leading-relaxed text-lg">
+            Join{" "}
+            <span className="text-purple-400 font-semibold">SIHchronize</span>{" "}
+            to unify and manage your institution’s educational data. Register
+            your college, track performance metrics, and explore integrated
+            analytics for smarter education.
           </p>
+        </div>
 
-          {error && <p className="text-sm text-center text-red-600">{error}</p>}
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Name fields (v1 pattern) */}
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-              {["firstName", "middleName", "lastName"].map((name) => (
-                <div key={name} className="flex items-center px-3 border rounded-lg">
-                  <User className="w-5 h-5 text-purple-600" />
-                  <input
-                    type="text"
-                    name={name}
-                    value={formData[name]}
-                    onChange={handleChange}
-                    required={name !== "middleName"}
-                    className="w-full px-3 py-2 outline-none"
-                    placeholder={name.charAt(0).toUpperCase() + name.slice(1)}
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Email */}
-            {/* Email */}
+        <div className="flex-1 bg-black/85 p-12 md:p-14">
+          <h2 className="text-3xl font-semibold text-white mb-8 text-center">
+            Register to SIHchronize!
+          </h2>
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Email</label>
-              <div className="flex items-center px-3 mt-1 border rounded-lg">
-                <Mail className="w-5 h-5 text-purple-600" />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 outline-none"
-                  placeholder="you@example.com"
-                />
-              </div>
+              <label className="block text-gray-300 mb-2">College Name</label>
+              <input
+                type="text"
+                name="collegeName"
+                value={formData.collegeName}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:ring-2 focus:ring-purple-400 outline-none"
+                placeholder="Enter your college name"
+              />
             </div>
 
-            {/* Registration Number / userId (keep v2 field but v1 look) */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">Registration Number</label>
-              <div className="flex items-center px-3 mt-1 border rounded-lg">
-                <Mail className="w-5 h-5 text-purple-600" />
-                <input
-                  type="text"
-                  name="userId"
-                  value={formData.userId}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 outline-none"
-                  placeholder="unique reg. no."
-                />
-              </div>
+              <label className="block text-gray-300 mb-2">College Type</label>
+              <select
+                name="collegeType"
+                value={formData.collegeType}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:ring-2 focus:ring-purple-400 outline-none"
+              >
+                <option>Government</option>
+                <option>Private</option>
+              </select>
             </div>
 
-            {/* Role */}
             <div>
-              <label className="block text-sm font-medium text-gray-700">Role</label>
-              <div className="flex items-center px-3 mt-1 border rounded-lg">
-                <Briefcase className="w-5 h-5 text-purple-600" />
-                <select
-                  name="role"
-                  value={formData.role}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 py-2 bg-transparent outline-none"
-                >
-                  <option value="">Select a role</option>
-                  <option value="student">Student</option>
-                  <option value="faculty">Faculty</option>
-                  <option value="admin">Admin</option>
-                </select>
-              </div>
+              <label className="block text-gray-300 mb-2">
+                College Email ID
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:ring-2 focus:ring-purple-400 outline-none"
+                placeholder="example@college.ac.in"
+              />
             </div>
 
-            {/* Passwords (v1 style) */}
-            {['password', 'confirmPassword'].map((name, idx) => (
-              <div key={name}>
-                <label className="block text-sm font-medium text-gray-700">
-                  {idx === 0 ? 'Password' : 'Confirm Password'}
-                </label>
-                <div className="flex items-center px-3 mt-1 border rounded-lg">
-                  <Lock className="w-5 h-5 text-purple-600" />
-                  <input
-                    type="password"
-                    name={name}
-                    value={formData[name]}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-3 py-2 outline-none"
-                    placeholder={idx === 0 ? '••••••••' : 'Re-enter password'}
-                  />
-                </div>
-              </div>
-            ))}
+            <div>
+              <label className="block text-gray-300 mb-2">Password</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:ring-2 focus:ring-purple-400 outline-none"
+                placeholder="Enter a secure password"
+              />
+            </div>
+
+            <div>
+              <label className="block text-gray-300 mb-2">AISHE Code</label>
+              <input
+                type="text"
+                name="aisheCode"
+                value={formData.aisheCode}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-600 focus:ring-2 focus:ring-purple-400 outline-none"
+                placeholder="Enter your AISHE code"
+              />
+            </div>
 
             <button
               type="submit"
-              disabled={loading}
-              className="w-full py-3 font-semibold text-white transition rounded-lg shadow-md bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              className="w-full py-3 mt-6 bg-purple-700 hover:bg-purple-600 text-white rounded-lg font-semibold transition-all duration-300"
             >
-              {loading ? 'Registering...' : 'Sign Up'}
+              Proceed to Payment
             </button>
           </form>
-
-          <p className="text-sm text-center text-gray-600">
-            Already have an account?{' '}
-            <Link to="/login" className="text-blue-600 hover:underline">Login</Link>
-          </p>
         </div>
       </div>
+
+      {/* Subscription Plans Modal */}
+      {showPlans && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-50 overflow-y-auto py-14">
+          <div className="grid gap-6 max-w-6xl w-full md:grid-cols-3 mx-6">
+            {plans.map(({ name, price, duration, description, features, style }) => (
+              <div
+                key={name}
+                className={`flex flex-col rounded-2xl p-8 shadow-2xl border h-[460px] transition-transform duration-300 transform hover:scale-105 ${
+                  style === "gold"
+                    ? "bg-gradient-to-br from-yellow-300 via-yellow-100 to-yellow-400 text-gray-900 border-yellow-500 shadow-yellow-300"
+                    : style === "silver"
+                    ? "bg-gradient-to-br from-gray-100 via-gray-50 to-gray-200 text-gray-900 border-gray-400 shadow-gray-300"
+                    : "bg-white border-gray-300 text-gray-900"
+                }`}
+              >
+                <h2 className="text-2xl font-bold mb-3">{name}</h2>
+                <p className="text-gray-700 text-sm mb-5 leading-snug">
+                  {description}
+                </p>
+
+                <p className="text-4xl font-extrabold mb-6">{price}</p>
+
+                <ul className="mb-8 space-y-2 flex-grow text-sm">
+                  {features.map((feature) => (
+                    <li key={feature} className="flex items-start leading-tight">
+                      <svg
+                        className="w-4 h-4 text-purple-700 mr-2 mt-[3px] flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5 13l4 4L19 7"
+                        ></path>
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <button
+                  className={`w-full py-3 rounded-lg text-sm font-semibold transition ${
+                    style === "gold"
+                      ? "bg-yellow-500 hover:bg-yellow-600 text-white"
+                      : style === "silver"
+                      ? "bg-gray-500 hover:bg-gray-600 text-white"
+                      : "bg-gray-900 hover:bg-gray-800 text-white"
+                  }`}
+                  onClick={() => handlePayment({ name, duration })}
+                >
+                  {style === "gold"
+                    ? "Get Gold Plan"
+                    : style === "silver"
+                    ? "Get Premium Plan"
+                    : `Choose ${name}`}
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {/* Close Button */}
+          <button
+            onClick={() => setShowPlans(false)}
+            className="absolute top-8 right-8 bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition"
+          >
+            ✕ Close
+          </button>
+        </div>
+      )}
     </div>
   );
-}
+};
+
+export default RegisterPage;
